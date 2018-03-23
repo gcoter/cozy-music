@@ -1,0 +1,71 @@
+{
+  "name": "cozy-music",
+  "version": "0.1.0",
+  "scripts": {
+    "clean:browser": "rm -rf build/*",
+    "clean:mobile": "rm -rf mobile/www/*",
+    "tx": "tx pull --all || true",
+    "lint": "npm-run-all --parallel lint:*",
+    "lint:js": "eslint '{src,test}/**/*.{js}'",
+    "format:js": "yarn lint:js --fix",
+    "lint:styles": "stylint src/styles --config ./.stylintrc",
+    "build": "yarn build:browser",
+    "commons:build": "cozy-scripts build --vue",
+    "build:browser": "npm-run-all --serial clean:browser lint tx 'commons:build --browser --production'",
+    "build:mobile": "npm-run-all --serial clean:mobile lint tx 'commons:build --mobile --production'",
+    "watch": "yarn watch:browser",
+    "commons:watch": "cozy-scripts watch --vue",
+    "watch:browser": "npm-run-all --serial clean:browser 'commons:watch --browser --development'",
+    "watch:mobile": "npm-run-all --serial clean:mobile 'commons:watch --mobile --development'",
+    "watch:standalone": "yarn watch:browser:standalone --vue",
+    "commons:watch:standalone": "cozy-scripts standalone",
+    "watch:browser:standalone": "npm-run-all --serial clean:mobile 'commons:watch:standalone --browser --development'",
+    "watch:mobile:standalone": "npm-run-all --serial clean:mobile 'commons:watch:standalone --browser --development'",
+    "deploy": "git-directory-deploy --directory build/ --branch build --repo=https://github.com/gcoter/cozy-music.git",
+    "deploy:travis": "git-directory-deploy --username gcoter --email deploy@travis-ci.org --directory build/ --repo=https://$GITHUB_TOKEN@github.com/gcoter/cozy-music.git",
+    "test": "cozy-scripts test --verbose --coverage",
+    "stack:docker": "docker run --rm -it -p 8080:8080 -p 5984:5984 -v \"$(pwd)/build\":/data/cozy-app/app cozy/cozy-app-dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gcoter/cozy-music.git"
+  },
+  "author": "",
+  "contributors": [],
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/gcoter/cozy-music/issues"
+  },
+  "homepage": "https://github.com/gcoter/cozy-music#readme",
+  "devDependencies": {
+    "@vue/test-utils": "1.0.0-beta.12",
+    "babel-polyfill": "6.26.0",
+    "babel-preset-cozy-app": "0.3.2",
+    "eslint": "4.19.1",
+    "eslint-config-standard": "11.0.0",
+    "eslint-plugin-import": "2.9.0",
+    "eslint-plugin-node": "6.0.1",
+    "eslint-plugin-standard": "3.0.1",
+    "git-directory-deploy": "1.5.1",
+    "identity-obj-proxy": "3.0.0",
+    "jest-serializer-vue": "1.0.0",
+    "npm-run-all": "4.1.2",
+    "prettier": "1.11.1",
+    "standard": "11.0.1",
+    "stylint": "1.5.9",
+    "vue-jest": "2.2.1",
+    "vue-loader": "14.2.1",
+    "vue-template-compiler": "2.5.16"
+  },
+  "dependencies": {
+    "cozy-bar": "4.9.3",
+    "cozy-client-js": "0.8.0",
+    "cozy-ui": "7.9.0",
+    "date-fns": "1.29.0",
+    "node-polyglot": "2.2.2",
+    "vue": "2.5.16",
+    "vue-router": "3.0.1",
+    "vuex": "3.0.1",
+    "cozy-scripts": "0.5.10"
+  }
+}
