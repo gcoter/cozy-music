@@ -58,14 +58,15 @@
     "vue-template-compiler": "2.5.16"
   },
   "dependencies": {
+    "amplitudejs": "^3.2.3",
     "cozy-bar": "4.9.3",
     "cozy-client-js": "0.8.0",
+    "cozy-scripts": "0.5.10",
     "cozy-ui": "7.9.0",
     "date-fns": "1.29.0",
     "node-polyglot": "2.2.2",
     "vue": "2.5.16",
     "vue-router": "3.0.1",
-    "vuex": "3.0.1",
-    "cozy-scripts": "0.5.10"
+    "vuex": "3.0.1"
   }
 }
