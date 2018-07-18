@@ -4,21 +4,9 @@
       <nav>
         <ul class='c-nav'>
           <li class='c-nav-item'>
-            <router-link class='c-nav-link' to='/viewhello1'>
+            <router-link class='c-nav-link' to='/home'>
               <icon class='c-nav-icon' v-bind:icon='navIcon' />
-              {{ t('Nav.hello_nav_1') }}
-            </router-link>
-          </li>
-          <li class='c-nav-item'>
-            <router-link class='c-nav-link' to='/viewhello2'>
-              <icon class='c-nav-icon' v-bind:icon='navIcon' />
-              {{ t('Nav.hello_nav_2') }}
-            </router-link>
-          </li>
-          <li class='c-nav-item'>
-            <router-link class='c-nav-link' to='/viewhello3'>
-              <icon class='c-nav-icon' v-bind:icon='navIcon' />
-              {{ t('Nav.hello_nav_3') }}
+              {{ t('Nav.home_nav') }}
             </router-link>
           </li>
         </ul>
@@ -37,9 +25,7 @@ import navIcon from '../assets/icons/icon-bullet-point.svg'
 
 import icon from './Icon'
 
-import Hello1 from './HelloViews/Hello1.vue'
-import Hello2 from './HelloViews/Hello2.vue'
-import Hello3 from './HelloViews/Hello3.vue'
+import Home from './Views/Home.vue'
 
 // This installs <router-view> and <router-link>,
 // and injects $router and $route to all router-enabled child components
@@ -50,14 +36,12 @@ const router = new VueRouter({
   base: '/',
   linkActiveClass: 'is-active',
   routes: [
-    { path: '/viewhello1', component: Hello1 },
-    { path: '/viewhello2', component: Hello2 },
-    { path: '/viewhello3', component: Hello3 },
-    { path: '/', redirect: '/viewhello1'},
+    { path: '/home', component: Home },
+    { path: '/', redirect: '/home'},
     // default, always at the end
-    { path: '*', redirect: '/viewhello1'}
+    { path: '*', redirect: '/home'}
   ]
-})
+});
 
 export default {
   router,
